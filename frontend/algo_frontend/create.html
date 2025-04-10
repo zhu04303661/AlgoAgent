@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产业垂类智能体打造平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        /* Header styles */
+        .header {
+            display: flex;
+            align-items: center;
+            background-color: #1e293b;
+            color: white;
+            padding: 0 20px;
+            height: 60px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            height: 100%;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            height: 100%;
+            color: #e2e8f0;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .nav-item.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-item-icon {
+            margin-right: 5px;
+        }
+        
+        .search-container {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 5px 15px;
+            width: 300px;
+        }
+        
+        .search-icon {
+            color: #94a3b8;
+            margin-right: 10px;
+        }
+        
+        .search-input {
+            background: transparent;
+            border: none;
+            color: white;
+            outline: none;
+            width: 100%;
+        }
+        
+        .search-input::placeholder {
+            color: #94a3b8;
+        }
+        
+        .header-icons {
+            display: flex;
+            margin-left: 20px;
+        }
+        
+        .header-icon {
+            color: #94a3b8;
+            font-size: 20px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #64748b;
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Sidebar styles */
+        .container {
+            display: flex;
+        }
+        
+        .sidebar {
+            width: 70px;
+            background-color: white;
+            height: calc(100vh - 60px);
+            border-right: 1px solid #e2e8f0;
+        }
+        
+        .sidebar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+            color: #64748b;
+            cursor: pointer;
+        }
+        
+        .sidebar-item:hover {
+            background-color: #f8fafc;
+            color: #3b82f6;
+        }
+        
+        .sidebar-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-text {
+            font-size: 12px;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb-item {
+            margin-right: 5px;
+        }
+        
+        .breadcrumb-separator {
+            margin: 0 5px;
+        }
+        
+        .content-area {
+            background-color: #e9eeff;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .back-button {
+            display: flex;
+            align-items: center;
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        .back-icon {
+            margin-right: 5px;
+        }
+        
+        .content-title {
+            text-align: center;
+            color: #4f6af6;
+            font-size: 24px;
+            margin: 40px 0;
+        }
+        
+        .input-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .input-area {
+            padding: 20px;
+            min-height: 150px;
+        }
+        
+        .input-placeholder {
+            color: #94a3b8;
+        }
+        
+        .input-footer {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .tag {
+            display: flex;
+            align-items: center;
+            color: #4f6af6;
+            font-size: 14px;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        
+        .tag-icon {
+            margin-right: 5px;
+        }
+        
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+        
+        .toggle-label {
+            color: #64748b;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .toggle {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background-color: #e2e8f0;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s;
+        }
+        
+        .toggle.active {
+            background-color: #4f6af6;
+        }
+        
+        .toggle.active::after {
+            left: 22px;
+        }
+        
+        .action-buttons {
+            margin-left: auto;
+            display: flex;
+        }
+        
+        .action-button {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        .action-button:hover {
+            background-color: #f8fafc;
+            color: #4f6af6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-bars logo-icon"></i>
+            <i class="fas fa-seedling logo-icon"></i>
+            图生
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-item">
+                <i class="fas fa-cube nav-item-icon"></i>
+                产品
+            </div>
+            <div class="nav-item active">
+                <i class="fas fa-bolt nav-item-icon"></i>
+                能力生产平台
+            </div>
+            <div class="nav-item">首页</div>
+            <div class="nav-item">模型仓库</div>
+            <div class="nav-item">Agent仓库</div>
+            <div class="nav-item">平台管理</div>
+            <div class="nav-item">项目管理</div>
+        </div>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="请输入">
+        </div>
+        
+        <div class="header-icons">
+            <i class="fas fa-search header-icon"></i>
+            <i class="fas fa-home header-icon"></i>
+            <i class="fas fa-bell header-icon"></i>
+            <i class="fas fa-comment header-icon"></i>
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-item">
+                <i class="fas fa-home sidebar-icon"></i>
+                <div class="sidebar-text">首页</div>
+            </div>
+            <div class="sidebar-item">
+                <i class="fas fa-graduation-cap sidebar-icon"></i>
+                <div class="sidebar-text">打造</div>
+            </div>
+            <div class="sidebar-item">
+                <i class="fas fa-hand-holding sidebar-icon"></i>
+                <div class="sidebar-text">使用</div>
+            </div>
+            <div class="sidebar-item">
+                <i class="fas fa-file-alt sidebar-icon"></i>
+                <div class="sidebar-text">文档</div>
+            </div>
+            <div class="sidebar-item">
+                <i class="fas fa-cog sidebar-icon"></i>
+                <div class="sidebar-text">设置</div>
+            </div>
+            <div class="sidebar-item">
+                <i class="fas fa-file-invoice sidebar-icon"></i>
+                <div class="sidebar-text">报表</div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="breadcrumb">
+                <div class="breadcrumb-item">当前所在项目:</div>
+                <div class="breadcrumb-item">垂类智能体</div>
+                <div class="breadcrumb-separator">/</div>
+                <div class="breadcrumb-item">新建垂类智能体</div>
+            </div>
+            
+            <div class="content-area">
+                <div class="back-button">
+                    <i class="fas fa-arrow-left back-icon"></i>
+                    返回
+                </div>
+                
+                <div class="content-title">垂类智能体打造的起点</div>
+                
+                <div class="input-container">
+                    <div class="input-area">
+                        <div class="input-placeholder">请输入您的想打造的主题</div>
+                    </div>
+                    
+                    <div class="input-footer">
+                        <div class="tag">
+                            <i class="fas fa-cog tag-icon"></i>
+                            机理探索
+                        </div>
+                        
+                        <div class="tag">
+                            <i class="fas fa-file tag-icon"></i>
+                            生产资料
+                        </div>
+                        
+                        <div class="toggle-container">
+                            <div class="toggle-label">直接创建</div>
+                            <div class="toggle"></div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <div class="action-button">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                            <div class="action-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle functionality
+        document.querySelectorAll('.toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+        
+        // Make input area editable
+        const inputArea = document.querySelector('.input-area');
+        inputArea.addEventListener('click', function() {
+            const placeholder = this.querySelector('.input-placeholder');
+            if (placeholder) {
+                placeholder.remove();
+                this.setAttribute('contenteditable', 'true');
+                this.focus();
+            }
+        });
+    </script>
+</body>
+</html>
